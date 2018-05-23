@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shiro.mapper.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.shiro.model.User" >
+    <id column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="salt" property="salt" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+  </resultMap>
+  
+  <select id="selectRolesByUsername" resultType="java.lang.String" parameterType="java.lang.String">
+    select r.role_name from role r
+		LEFT JOIN user_role ur on r.role_id = ur.role_id 
+		LEFT JOIN user u on u.user_id = ur.user_id
+		where u.username = #{username,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectPermissionsByUsername" resultType="java.lang.String" parameterType="java.lang.String">
+		select p.permission_name from permission p 
+		LEFT JOIN role_permission rp on rp.permission_id = p.permission_id 
+		LEFT JOIN user_role ur on rp.role_id = ur.role_id 
+		LEFT JOIN user u on u.user_id = ur.user_id
+		where u.username =  #{username,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectUserByusername" resultType="com.shiro.model.User" parameterType="java.lang.String">
+    select user_id, username, password,  salt
+    from user where username = #{username,jdbcType=VARCHAR}
+  </select>
+  
+  <!-- <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.shiro.model.User" >
+    insert into user (user_id, username, password, 
+      created_time, update_time, salt
+      )
+    values (#{userId,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{createdTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{salt,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.shiro.model.User" >
+    update user
+    set username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      created_time = #{createdTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      salt = #{salt,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select user_id, username, password, created_time, update_time, salt
+    from user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select user_id, username, password, created_time, update_time, salt
+    from user
+  </select> -->
+</mapper>

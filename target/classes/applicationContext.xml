@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns="http://www.springframework.org/schema/beans"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- 1.加载properties文件 -->
+	<context:property-placeholder location="classpath:application.properties" />
+	<!-- 2.扫描service层 -->
+	<!-- 
+		spring配置文件只扫描service层
+	 -->
+	<!-- <context:component-scan base-package="com.zzsxt.lee.shiro.service"></context:component-scan> -->
+	<!-- 
+		排除扫描
+	 -->
+	<context:component-scan base-package="com.shiro">
+		<!-- 
+			exclude-filter:排除扫描指定的注解
+				需要排除所有的controller注解
+		 -->
+		<context:exclude-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+		<context:exclude-filter type="annotation"
+			expression="org.springframework.web.bind.annotation.ControllerAdvice" />
+	</context:component-scan>
+
+	<!-- 3.配置数据源 -->
+	<import resource="spring/applicationContext-db.xml" />
+
+	<!-- 4.事物管理器txAdvice -->
+	<import resource="spring/applicationContext-tx.xml" />
+
+	<!-- 5.引入shiro的配置文件 -->
+	<import resource="spring/applicationContext-shiro.xml" />
+
+</beans>
