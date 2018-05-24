@@ -92,7 +92,13 @@
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>echarts1</cite>
                         </a>
-                    </li >
+                    </li>
+                    <li>
+                        <a _href="${ctx }/totest4">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>echarts2</cite>
+                        </a>
+                    </li>
                 </ul>
             </li>
         </ul>
