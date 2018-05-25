@@ -66,5 +66,11 @@ public class ToTestController {
 		return "sys/test7";
 	}
 	
+	@RequestMapping("/totest7edit")
+	public String totest7edit() {
+		
+		return "sys/test7edit";
+	}
+	
 	
 }

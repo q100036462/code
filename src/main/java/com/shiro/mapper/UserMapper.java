@@ -13,4 +13,6 @@ public interface UserMapper extends Mapper<User>{
 	List<String> selectPermissionsByUsername(String username);
 	
 	User selectUserByusername(String username);
+	
+	int updateType(User user);
 }

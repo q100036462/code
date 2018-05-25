@@ -61,6 +61,18 @@ public class UserController {
 		return resultMap;
 		
 	}
+	
+	@RequestMapping("/updateType")
+	@ResponseBody
+	public String updateType(User user){
+		boolean b = userService.updateType(user);
+		if (b) {
+			return "success";
+		}
+		
+		return "error";
+		
+	}
 
 	
 

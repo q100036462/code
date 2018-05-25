@@ -19,26 +19,29 @@
   </head>
   
   <body>
-  		<div style="margin-top: 10px"></div>
+  		
 		 
-		<div class="layui-btn-group demoTable">
+		<div style="margin-top: 10px" class="layui-btn-group demoTable">
 		  <button class="layui-btn" data-type="getCheckData">获取选中行数据</button>
 		  <button class="layui-btn" data-type="getCheckLength">获取选中数目</button>
 		  <button class="layui-btn" data-type="isAll">验证是否全选</button>
 		</div>
 		 
-		<table class="layui-table" lay-data="{height: 'full-250', cellMinWidth: 80,  url:'userlist2', page:true, id:'idTest'}" lay-filter="demo">
+		<table class="layui-table" lay-data="{height: 'full-250', cellMinWidth: 80,  url:'userlist2', page:true,limits:[5,10,15,20], id:'idTest'}" lay-filter="demo">
 		  <thead>
 		    <tr>
+		      <th lay-data="{type:'checkbox', fixed: 'left'}"></th>
 		      <th lay-data="{field:'userId', width:80, sort: true, fixed: true}">ID</th>
-		      <th lay-data="{field:'username', width:150}">用户名</th>
-		      <th lay-data="{field:'password', width:350, sort: true}">密码</th>
+		      <th lay-data="{field:'username',edit: 'text', width:150}">用户名</th>
+		      <th lay-data="{field:'password',edit: 'password', width:350, sort: true}">密码</th>
 		      <th lay-data="{field:'type', width:150,templet: '#type'}">用户状态</th>
 		      <th lay-data="{field:'salt', width:150}">盐值</th>
 		      <th lay-data="{fixed: 'right', width:178, align:'center', toolbar: '#barDemo'}"></th>
 		    </tr>
 		  </thead>
 		</table>
+		
+		<
 		 
 		<script type="text/html" id="barDemo">
   			<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
@@ -46,13 +49,21 @@
   			<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 		</script>
 		<script>
-			layui.use('table', function(){
+			layui.use(['form','table'], function(){
 			  var table = layui.table;
+			  var form = layui.form;
+			  
+				//监听用户状态操作
+			  form.on('switch(lockDemo)', function(obj){
+			  	this.value=(obj.elem.checked?1:0);
+			    layer.tips(this.value + ' ' + this.name + '：'+ obj.elem.checked, obj.othis);
+			  });
+				
 			  //监听表格复选框选择
 			  table.on('checkbox(demo)', function(obj){
 			    console.log(obj)
 			  });
-			  //监听工具条
+			//监听工具条
 			  table.on('tool(demo)', function(obj){
 			    var data = obj.data;
 			    if(obj.event === 'detail'){
@@ -91,11 +102,7 @@
 			});
 		</script>
 		<script type="text/javascript" id="type">
-  			  {{#  if(d.type == 1){ }}
-		  	    <span style="color: green">正常</span>
-		  	  {{#  } else if(d.type == 0){ }}
-		  		<span style="color: red">封禁</span>
-		  	  {{#  } }}
+			<input type="checkbox" name="type" value="{{d.type}}" lay-skin="switch" lay-text="正常|封禁" lay-filter="lockDemo" {{ d.type == 1 ? 'checked' : '' }}>
   		</script>
   		
   		

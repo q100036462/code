@@ -33,8 +33,21 @@ public class UserService extends AbstractService<User>{
 	
 	public PageInfo<User> findUserByPage(int page, int pageSize) {
 		PageHelper.startPage(page, pageSize);
-		List<User> list = userMapper.selectAll();
+		List<User> list = getMapper().selectAll();
 		return new PageInfo<User>(list);
+	}
+	//更改用户状态（封禁，解封）
+	public boolean updateType(User user) {
+		if (user.getType() == 1) {
+			user.setType(0);
+		}else if (user.getType() == 0) {
+			user.setType(1);
+		}
+		int b = userMapper.updateType(user);
+		if (b >= 1) {
+			return true;
+		}
+		return false;
 	}
 
 }
