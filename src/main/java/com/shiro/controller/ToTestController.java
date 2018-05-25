@@ -49,5 +49,22 @@ public class ToTestController {
 		return "sys/test4";
 	}
 	
+	@RequestMapping("/totest5")
+	public String totest5() {
+		
+		return "sys/test5";
+	}
+	
+	@RequestMapping("/totest6")
+	public String totest6() {
+		
+		return "sys/test6";
+	}
+	@RequestMapping("/totest7")
+	public String totest7() {
+		
+		return "sys/test7";
+	}
+	
 	
 }

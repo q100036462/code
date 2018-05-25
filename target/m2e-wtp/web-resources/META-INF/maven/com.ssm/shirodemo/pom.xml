@@ -84,6 +84,13 @@
 			<scope>test</scope>
 		</dependency>
 		<!-- junit end -->
+		
+		<!-- PageHelper分页助手 -->
+		<dependency>
+		     <groupId>com.github.pagehelper</groupId>
+		     <artifactId>pagehelper</artifactId>
+		     <version>4.1.4</version>
+		 </dependency>
 
 		<!--spring start -->
 		<dependency>

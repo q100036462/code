@@ -40,6 +40,7 @@
         </form>
 		<!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
 		<div id="main" style="width: 600px;height:400px;float: left;"></div>
+		<div id="page1"></div>
     
     
     
@@ -84,14 +85,35 @@
 		    // 使用刚指定的配置项和数据显示图表。
 		    myChart.setOption(option);
 		    
-		    layui.use(['form','code'], function(){
+		    layui.use(['form','code','laypage'], function(){
 		        form = layui.form;
+		        var laypage = layui.laypage;
 
 		        layui.code();
 
 		        $('#x-city').xcity('广东','广州市','东山区');
 
 		      });
+		    
+		    layui.use(['laypage', 'layer'], function(){
+		    	  var laypage = layui.laypage;
+		    	  var layer = layui.layer;
+		    	  var url = "/userlist";
+		    	  var config = {page:1,pageSize:4};
+		    	  $.getJSON(url,config,function(res){
+		    		  laypage.render({
+		    			    elem: 'page1',
+		    			    count: res.total, //总条数
+		    			    limit:config.pageSize, //每页条数
+		    			    theme: '#FFB800', //自定义颜色
+		    			    jump: function(obj, first){
+		    			    	alert(obj.curr);
+		    			    }
+		    		   });
+		    		  
+		    	  }); 
+
+		    	});
 		    
 		
 	</script>

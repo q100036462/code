@@ -10,6 +10,7 @@ import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
+import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
@@ -82,5 +83,19 @@ public class ShiroRealm extends AuthorizingRealm {
 		info.addRoles(roleList);
 		info.addStringPermissions(permissionList);
 		return info;
+	}
+	
+	public static void main(String[] args) {
+		// e10adc3949ba59abbe56e057f20f883e加密一次后的123456的密码
+		// fc1709d0a95a6be30bc5926fdb7f22f4加密1024次后的123456的密码
+		// ee74a75f182c46effa1a4b350d537566加完盐值(ByteSource.Util.bytes("1"))后的密码
+		
+		// shiro会通过SimpleHash这个方法对密码进行加密操作
+		// 第一个参数：加密的方式MD5
+		// 第二个参数：密码的明文
+		// 第三个参数：盐值
+		// 第四个参数：加密次数
+		Object pwd = new SimpleHash("MD5", "123456", ByteSource.Util.bytes("123"), 1024);
+		System.out.println(pwd);
 	}
 }

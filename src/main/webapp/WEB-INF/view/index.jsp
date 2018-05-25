@@ -62,7 +62,7 @@
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a _href="${ctx }/userlist">
+                        <a _href="${ctx }/toUserlistpage">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>用户管理</cite>
                         </a>
@@ -97,6 +97,24 @@
                         <a _href="${ctx }/totest4">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>echarts2</cite>
+                        </a>
+                    </li>
+                    <li>
+                        <a _href="${ctx }/totest5">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>测试页面5</cite>
+                        </a>
+                    </li>
+                    <li>
+                        <a _href="${ctx }/totest6">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>测试页面6</cite>
+                        </a>
+                    </li>
+                    <li>
+                        <a _href="${ctx }/totest7">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>测试页面7</cite>
                         </a>
                     </li>
                 </ul>
